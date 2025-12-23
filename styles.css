@@ -281,7 +281,7 @@ body {
 
 .section-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 .section-header h2 {
@@ -525,6 +525,11 @@ body {
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 500;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
 }
 
 /* Connect Section */

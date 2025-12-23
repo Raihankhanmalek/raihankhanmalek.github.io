@@ -1,3 +1,11 @@
+// Prevent automatic scrolling on page reload
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+window.addEventListener('load', () => {
+    window.scrollTo(0, 0);
+});
+
 // Navigation and smooth scrolling
 document.querySelectorAll('.nav-link').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

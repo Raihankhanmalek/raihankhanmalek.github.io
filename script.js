@@ -90,12 +90,93 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Form submission handling
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Thank you for your message! I will get back to you soon.');
-    this.reset();
-});
+// Resume download handling from GitHub
+const resumeDownloadLink = document.getElementById('resume-download-link');
+if (resumeDownloadLink) {
+    resumeDownloadLink.addEventListener('click', async function(e) {
+        e.preventDefault();
+        // GitHub raw URL for resume (works perfectly with direct downloads)
+        const downloadUrl = 'https://raw.githubusercontent.com/Raihankhanmalek/raihankhanmalek.github.io/main/resume.pdf';
+        
+        try {
+            // Fetch the file from GitHub
+            const response = await fetch(downloadUrl);
+            if (response.ok) {
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'Raihankhan_Malek_Resume.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(url);
+            } else {
+                // If file not found, show error
+                console.error('Resume file not found. Please ensure resume.pdf is in your repository root.');
+                alert('Resume file not found. Please ensure resume.pdf is uploaded to your repository.');
+            }
+        } catch (error) {
+            console.error('Error downloading resume:', error);
+            alert('Error downloading resume. Please try again later.');
+        }
+    });
+}
+
+// Form submission handling with Formspree
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Disable submit button and show loading state
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+        
+        // Get form data
+        const formData = new FormData(this);
+        
+        try {
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                // Success
+                formStatus.textContent = 'Thank you for your message! I will get back to you soon.';
+                formStatus.className = 'form-status success';
+                this.reset();
+            } else {
+                // Error from Formspree
+                const data = await response.json();
+                if (data.errors) {
+                    formStatus.textContent = data.errors.map(error => error.message).join(', ');
+                } else {
+                    formStatus.textContent = 'Oops! There was a problem submitting your message. Please try again.';
+                }
+                formStatus.className = 'form-status error';
+            }
+        } catch (error) {
+            // Network error
+            formStatus.textContent = 'Oops! There was a problem submitting your message. Please check your connection and try again.';
+            formStatus.className = 'form-status error';
+        } finally {
+            // Re-enable submit button
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+        }
+    });
+}
 
 // Intersection Observer for scroll animations
 const observerOptions = {

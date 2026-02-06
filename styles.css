@@ -548,11 +548,9 @@ body {
     display: flex;
 }
 
-/* Responsive: open dropdown upward so all options (e.g. Statistics) stay visible above Connect section */
+/* Responsive: keep dropdown opening below; limit height so it doesn’t get buried, scroll inside panel */
 @media (max-width: 768px) {
     .filter-dropdown-panel {
-        top: auto;
-        bottom: calc(100% + 0.5rem);
         max-height: min(280px, 60vh);
     }
 }

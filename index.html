@@ -389,8 +389,47 @@
                     <h2>Featured Projects</h2>
                     <p>Showcase of my data analytics work</p>
                 </div>
+                <div class="projects-filter" role="group" aria-label="Filter projects by skill">
+                    <div class="filter-dropdown">
+                        <button type="button" class="filter-dropdown-trigger" id="filter-dropdown-trigger" aria-expanded="false" aria-haspopup="listbox">
+                            <i class="fas fa-filter"></i>
+                            <span class="filter-dropdown-label">Filter by skills</span>
+                            <i class="fas fa-chevron-down filter-dropdown-arrow"></i>
+                        </button>
+                        <div class="filter-dropdown-panel" id="filter-dropdown-panel" role="listbox">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" name="skill-filter" value="python">
+                                <span>Python</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" name="skill-filter" value="sql">
+                                <span>SQL</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" name="skill-filter" value="power bi">
+                                <span>Power BI</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" name="skill-filter" value="tableau">
+                                <span>Tableau</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" name="skill-filter" value="excel">
+                                <span>Excel</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" name="skill-filter" value="ml">
+                                <span>ML</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" name="skill-filter" value="statistics">
+                                <span>Statistics</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="projects-grid">
-                    <div class="project-card">
+                    <div class="project-card" data-skills="python,ml,statistics">
                         <div class="project-icon">
                             <i class="fas fa-heartbeat"></i>
                         </div>
@@ -398,15 +437,15 @@
                         <p>Built a Logistic Regression ML model using Python and Scikit-learn, achieving 89% accuracy on 300+ patient records. Developed an end-to-end ML pipeline including data preprocessing, model training, and deployment using Streamlit.</p>
                         <div class="project-tech">
                             <span>Python</span>
-                            <span>Scikit-learn</span>
-                            <span>Streamlit</span>
+                            <span>ML</span>
+                            <span>Statistics</span>
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/Raihankhanmalek/Heart-Disease-Prediction" class="btn btn-outline">View Project</a>
                             <a href="https://hdpraihankhanmalek.streamlit.app/" class="btn btn-primary">Live</a>
                         </div>
                     </div>
-                    <div class="project-card">
+                    <div class="project-card" data-skills="sql,power bi">
                         <div class="project-icon">
                             <i class="fas fa-store"></i>
                         </div>
@@ -415,13 +454,12 @@
                         <div class="project-tech">
                             <span>SQL</span>
                             <span>Power BI</span>
-                            <span>RFM Analysis</span>
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/Raihankhanmalek/Super-Store-Analysis" class="btn btn-outline">View Project</a>
                         </div>
                     </div>
-                    <div class="project-card">
+                    <div class="project-card" data-skills="python,tableau,power bi">
                         <div class="project-icon">
                             <i class="fas fa-phone"></i>
                         </div>
@@ -436,7 +474,7 @@
                             <a href="https://github.com/Raihankhanmalek/Telco_Customer_Churn_Analysis" class="btn btn-outline">View Project</a>
                         </div>
                     </div>
-                    <div class="project-card">
+                    <div class="project-card" data-skills="python,ml">
                         <div class="project-icon">
                             <i class="fas fa-credit-card"></i>
                         </div>
@@ -444,14 +482,13 @@
                         <p>Built a machine learning model to detect fraudulent financial transactions using Python. It includes data exploration, feature engineering, and training multiple models (Logistic Regression, Random Forest, and XGBoost), with performance evaluated using ROC-AUC and confusion matrices.</p>
                         <div class="project-tech">
                             <span>Python</span>
-                            <span>Scikit-learn</span>
-                            <span>XGBoost</span>
+                            <span>ML</span>
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/Raihankhanmalek/Fraud-Detection-in-Financial-Transaction" class="btn btn-outline">View Project</a>
                         </div>
                     </div>
-                    <div class="project-card">
+                    <div class="project-card" data-skills="python,statistics">
                         <div class="project-icon">
                             <i class="fas fa-utensils"></i>
                         </div>
@@ -459,14 +496,13 @@
                         <p>This project analyzes Zomato restaurant data to study customer preferences, ratings, and cost patterns. It uses data cleaning, exploratory analysis, and visualizations to identify trends in online ordering. The insights help understand how different restaurant types perform and attract customers.</p>
                         <div class="project-tech">
                             <span>Python</span>
-                            <span>Pandas</span>
-                            <span>Matplotlib</span>
+                            <span>Statistics</span>
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/Raihankhanmalek/Zomato-Data-Analysis" class="btn btn-outline">View Project</a>
                         </div>
                     </div>
-                    <div class="project-card">
+                    <div class="project-card" data-skills="python,excel,statistics">
                         <div class="project-icon">
                             <i class="fas fa-gift"></i>
                         </div>
@@ -474,8 +510,8 @@
                         <p>This Diwali Sales Analysis project examines customer purchasing behavior and sales performance during the Diwali festival. Using data cleaning, exploratory analysis, and visualizations, it identifies key trends across products, customer segments, and revenue to support data-driven marketing and sales strategies.</p>
                         <div class="project-tech">
                             <span>Python</span>
-                            <span>Scikit-learn</span>
-                            <span>Streamlit</span>
+                            <span>Excel</span>
+                            <span>Statistics</span>
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/Raihankhanmalek/Diwali_Sales_Analysis" class="btn btn-outline">View Project</a>

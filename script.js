@@ -272,3 +272,64 @@ window.addEventListener('load', () => {
 
 document.body.style.opacity = '0';
 document.body.style.transition = 'opacity 0.5s ease';
+
+// Projects filter by skill (multi-select dropdown: show projects that have ALL selected skills)
+const projectCards = document.querySelectorAll('.project-card');
+const skillCheckboxes = document.querySelectorAll('.projects-filter input[name="skill-filter"]');
+const filterDropdown = document.querySelector('.filter-dropdown');
+const filterTrigger = document.getElementById('filter-dropdown-trigger');
+const filterLabel = document.querySelector('.filter-dropdown-label');
+const filterPanel = document.getElementById('filter-dropdown-panel');
+
+function updateFilterLabel() {
+    const selected = Array.from(skillCheckboxes).filter(cb => cb.checked);
+    if (filterLabel) {
+        filterLabel.textContent = selected.length === 0
+            ? 'Filter by skills'
+            : selected.map(cb => cb.closest('label').querySelector('span').textContent).join(', ');
+    }
+}
+
+function applyProjectFilter() {
+    const selected = Array.from(skillCheckboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value.toLowerCase());
+
+    projectCards.forEach(card => {
+        const skills = (card.getAttribute('data-skills') || '').toLowerCase();
+        const match = selected.length === 0 || selected.every(skill => skills.includes(skill));
+        card.setAttribute('data-hidden', match ? 'false' : 'true');
+    });
+    updateFilterLabel();
+}
+
+function toggleFilterDropdown() {
+    if (filterDropdown) {
+        filterDropdown.classList.toggle('open');
+        filterTrigger.setAttribute('aria-expanded', filterDropdown.classList.contains('open'));
+    }
+}
+
+function closeFilterDropdown() {
+    if (filterDropdown && filterDropdown.classList.contains('open')) {
+        filterDropdown.classList.remove('open');
+        if (filterTrigger) filterTrigger.setAttribute('aria-expanded', 'false');
+    }
+}
+
+if (skillCheckboxes.length && projectCards.length) {
+    skillCheckboxes.forEach(cb => {
+        cb.addEventListener('change', applyProjectFilter);
+    });
+}
+
+if (filterTrigger && filterPanel) {
+    filterTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleFilterDropdown();
+    });
+    filterPanel.addEventListener('click', (e) => e.stopPropagation());
+    document.addEventListener('click', closeFilterDropdown);
+}
+
+updateFilterLabel();

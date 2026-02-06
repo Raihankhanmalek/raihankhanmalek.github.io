@@ -295,11 +295,19 @@ function applyProjectFilter() {
         .filter(cb => cb.checked)
         .map(cb => cb.value.toLowerCase());
 
+    let visibleCount = 0;
     projectCards.forEach(card => {
         const skills = (card.getAttribute('data-skills') || '').toLowerCase();
         const match = selected.length === 0 || selected.every(skill => skills.includes(skill));
         card.setAttribute('data-hidden', match ? 'false' : 'true');
+        if (match) visibleCount++;
     });
+
+    const noResultsEl = document.getElementById('projects-no-results');
+    if (noResultsEl) {
+        const showNoResults = selected.length > 0 && visibleCount === 0;
+        noResultsEl.hidden = !showNoResults;
+    }
     updateFilterLabel();
 }
 

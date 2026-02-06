@@ -571,6 +571,32 @@ body {
     display: none;
 }
 
+.projects-no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.projects-no-results[hidden] {
+    display: none !important;
+}
+
+.projects-no-results i {
+    font-size: 2.5rem;
+    opacity: 0.5;
+}
+
+.projects-no-results p {
+    margin: 0;
+    font-size: 1rem;
+    max-width: 320px;
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));

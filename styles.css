@@ -475,13 +475,24 @@ body {
 }
 
 /* Projects Section */
+#projects {
+    overflow: visible;
+}
+
+#projects .container {
+    overflow: visible;
+}
+
 .projects-filter {
     margin-bottom: 2rem;
+    position: relative;
+    z-index: 100;
 }
 
 .filter-dropdown {
     position: relative;
     display: inline-block;
+    z-index: 1001;
 }
 
 .filter-dropdown-trigger {
@@ -524,16 +535,32 @@ body {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    z-index: 100;
+    z-index: 1001;
     display: none;
     flex-direction: column;
     gap: 0.25rem;
     max-height: 320px;
     overflow-y: auto;
+    isolation: isolate;
 }
 
 .filter-dropdown.open .filter-dropdown-panel {
     display: flex;
+}
+
+/* Responsive: open dropdown upward so all options (e.g. Statistics) stay visible above Connect section */
+@media (max-width: 768px) {
+    .filter-dropdown-panel {
+        top: auto;
+        bottom: calc(100% + 0.5rem);
+        max-height: min(280px, 60vh);
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-dropdown-panel {
+        max-height: min(260px, 55vh);
+    }
 }
 
 .filter-checkbox {
